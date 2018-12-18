@@ -724,18 +724,117 @@ public class Solution {
         return dp[s.length()-1];
     }
 
+    public boolean hasCycle(ListNode head) {
+        if (head == null){
+            return false;
+        }
+        if (head.next == null){
+            return false;
+        }
+        ArrayList<ListNode> arrayList = new ArrayList<>();
+        arrayList.add(head);
+        head = head.next;
+        while (head != null){
+            if(arrayList.contains(head)){
+                return true;
+            }
+            arrayList.add(head);
+            head = head.next;
+        }
+        return false;
+    }
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        HashSet<ListNode> hashSet = new HashSet<>();
+        if(headA == headB){
+            return headA;
+        }
+        while (headA != null){
+            hashSet.add(headA);
+            headA = headA.next;
+        }
+        while (headB != null){
+            if(hashSet.contains(headB)){
+                return headB;
+            }
+            headB = headB.next;
+        }
+        return null;
+    }
+
+    public int[] twoSum2(int[] numbers, int target) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        int diff;
+        for (int i = 0; i < numbers.length; i++) {
+            diff = target - numbers[i];
+            if (hashMap.containsKey(diff)){
+                return new int[]{hashMap.get(diff), i};
+            }
+            hashMap.put(numbers[i], i);
+        }
+        return new int[]{0};
+    }
+
+    public String reverseWords(String s) {
+        if (s.length() < 1){
+            return "";
+        }
+        StringBuilder ret = new StringBuilder();
+        int j = s.length();
+        for (int i = s.length()-1; i > 0; i--) {
+            if (s.charAt(i) == ' '){
+                String str = s.substring(i+1,j);
+                if (str.equals("")){
+                    j--;
+                    continue;
+                }
+                ret.append(str);
+                ret.append(' ');
+                j = i;
+            }
+        }
+        int i;
+        for (i = 0; i < j; i++) {
+            if (s.charAt(i) != ' '){
+                break;
+            }
+        }
+        String str = s.substring(i,j);
+        ret.append(str);
+        //remove whitespace from end
+        StringBuilder f = new StringBuilder();
+        i = ret.toString().length()-1;
+        for (; i > 0; i--) {
+            if (ret.toString().charAt(i) != ' '){
+                break;
+            }
+        }
+        f.append(ret.toString().substring(0,i+1));
+        if (f.toString().equals(" ")){
+            return "";
+        }
+        return f.toString();
+    }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        int[] input = new int[]{7,1,5,3,6,4};
-        boolean[] b = new boolean[5];
+        String input = " ";
+//        int[] input = new int[]{7,1,5,3,6,4};
+//        boolean[] b = new boolean[5];
 //        String[] input = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
 //        int input = 3;
+
 //        TreeNode node = new Solution.TreeNode(3);
 //        node.left = new Solution.TreeNode(20);
 //        node.right = new Solution.TreeNode(9);
 //        node.right.right = new Solution.TreeNode(7);
 //        node.right.left = new Solution.TreeNode(15);
-        System.out.println(b[4]);
+
+//        ListNode node = new ListNode(3);
+//        node.next = new ListNode(2);
+//        node.next.next = new ListNode(0);
+//        node.next.next.next = new ListNode(-4);
+//        node.next.next.next.next = node.next;
+        System.out.println("|" + s.reverseWords(input) + "|");
     }
 }
