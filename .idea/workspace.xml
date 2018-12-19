@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b3f7ada-0234-4548-80d4-ebdb85cb7211" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/MinStack.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hasCycle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/BSTrightSideView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/VisitIslands.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/countPrimes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lowestCommonSubtree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/reverseLinkedList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Extra CS stuff/Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Extra CS stuff/Solution.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
@@ -65,23 +68,23 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="4" />
+          <entry key="java" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="4" />
+          <entry key="JAVA" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="1" />
-          <entry key="java" value="2427" />
+          <entry key="java" value="4826" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2427" />
+          <entry key="JAVA" value="4826" />
           <entry key="PLAIN_TEXT" value="1" />
         </counts>
       </usages-collector>
@@ -95,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Solution.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="810" column="44" selection-start-line="810" selection-start-column="44" selection-end-line="810" selection-end-column="44" />
+            <state relative-caret-position="357">
+              <caret line="992" column="42" selection-start-line="992" selection-start-column="42" selection-end-line="992" selection-end-column="42" />
               <folding>
                 <element signature="e#147#148#0" expanded="true" />
                 <element signature="e#178#179#0" expanded="true" />
@@ -108,10 +111,14 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/twoSum.java">
+        <entry file="file://$PROJECT_DIR$/src/lowestCommonSubtree.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+            <state relative-caret-position="12">
+              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+              <folding>
+                <element signature="e#159#160#0" expanded="true" />
+                <element signature="e#190#191#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -128,6 +135,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>solu</find>
+      <find>reverse</find>
+      <find>stack</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,6 +167,12 @@
         <option value="$PROJECT_DIR$/src/hasCycle.java" />
         <option value="$PROJECT_DIR$/src/minStack.java" />
         <option value="$PROJECT_DIR$/src/MinStack.java" />
+        <option value="$PROJECT_DIR$/src/reverseWordsInAString.java" />
+        <option value="$PROJECT_DIR$/src/BSTrightSideView.java" />
+        <option value="$PROJECT_DIR$/src/VisitIslands.java" />
+        <option value="$PROJECT_DIR$/src/countPrimes.java" />
+        <option value="$PROJECT_DIR$/src/reverseLinkedList.java" />
+        <option value="$PROJECT_DIR$/src/lowestCommonSubtree.java" />
         <option value="$PROJECT_DIR$/src/Solution.java" />
       </list>
     </option>
@@ -208,7 +223,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545111400550" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545242496488" />
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="Console" />
@@ -358,6 +373,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="countPrimes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="countPrimes" />
+      <module name="Extra CS stuff" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="rotate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="rotate" />
       <module name="Extra CS stuff" />
@@ -473,10 +496,12 @@
       <item itemvalue="Application.Solution" />
       <item itemvalue="Application.rotate" />
       <item itemvalue="Application.MinStack" />
+      <item itemvalue="Application.countPrimes" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Solution" />
+        <item itemvalue="Application.countPrimes" />
         <item itemvalue="Application.MinStack" />
         <item itemvalue="Application.rotate" />
         <item itemvalue="Application.BinaryTree" />
@@ -500,12 +525,12 @@
       <workItem from="1544158433703" duration="32560000" />
       <workItem from="1544567242306" duration="1019000" />
       <workItem from="1544893851877" duration="4655000" />
-      <workItem from="1545103901176" duration="5674000" />
+      <workItem from="1545103901176" duration="12296000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48486000" />
+    <option name="totallyTimeSpent" value="55108000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -594,36 +619,12 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>226</line>
-          <properties class="Solution" method="longestPalindrome">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/rotate.java</url>
           <line>20</line>
           <properties class="rotate" method="rotate">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>599</line>
-          <properties class="Solution" method="isValidBST">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>726</line>
-          <properties class="Solution" method="hasCycle">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/MinStack.java</url>
@@ -634,12 +635,26 @@
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>777</line>
-          <properties class="Solution" method="reverseWords">
+          <url>file://$PROJECT_DIR$/src/countPrimes.java</url>
+          <line>21</line>
+          <properties class="countPrimes" method="countPrimes">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="16" />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/Solution.java</url>
+          <line>930</line>
+          <properties class="Solution" method="isPalindrome">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Solution.java</url>
+          <line>940</line>
+          <properties />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -821,10 +836,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/reverseWordsInAString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="44" column="62" selection-start-line="44" selection-start-column="62" selection-end-line="44" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/BSTrightSideView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="50" column="28" selection-start-line="50" selection-start-column="28" selection-end-line="50" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#284#285#0" expanded="true" />
+            <element signature="e#315#316#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/VisitIslands.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="52" column="5" selection-start-line="52" selection-start-column="5" selection-end-line="52" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/countPrimes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="30" column="15" selection-start-line="30" selection-start-column="15" selection-end-line="30" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reverseLinkedList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/lowestCommonSubtree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
+          <folding>
+            <element signature="e#159#160#0" expanded="true" />
+            <element signature="e#190#191#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Solution.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="810" column="44" selection-start-line="810" selection-start-column="44" selection-end-line="810" selection-end-column="44" />
+        <state relative-caret-position="357">
+          <caret line="992" column="42" selection-start-line="992" selection-start-column="42" selection-end-line="992" selection-end-column="42" />
           <folding>
             <element signature="e#147#148#0" expanded="true" />
             <element signature="e#178#179#0" expanded="true" />

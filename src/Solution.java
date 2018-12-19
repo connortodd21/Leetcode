@@ -816,25 +816,177 @@ public class Solution {
         return f.toString();
     }
 
+    public void printLevelOrder(TreeNode root){
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            TreeNode temp = queue.poll();
+            System.out.println(temp.val);
+            //enqueue left
+            if(temp.left != null){
+                queue.add(temp.left);
+            }
+            //enqueue right
+            if(temp.right != null){
+                queue.add(temp.right);
+            }
+        }
+    }
+
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> arrayList = new ArrayList<>();
+        if(root == null){
+            return new ArrayList<>();
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.remove();
+                if(i == 0){
+                    arrayList.add(node.val);
+                }
+                if(node.right != null){
+                    queue.add(node.right);
+                }
+                if(node.left != null){
+                    queue.add(node.left);
+                }
+            }
+        }
+        return arrayList;
+    }
+
+    public int numIslands(char[][] grid) {
+        if(grid.length == 0){
+            return 0;
+        }
+        int l1 = grid.length;
+        int l2 = grid[0].length;
+        boolean[][] marked = new boolean[l1][l2];
+        int count = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if(grid[i][j] == '1' && !marked[i][j]){
+                    markIsland(marked, grid, i ,j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    public void markIsland(boolean[][] marked, char[][] grid, int i , int j){
+        if(i < 0 || j < 0 || i >= grid.length || j >= grid[0].length || marked[i][j] || grid[i][j] == '0'){
+            return;
+        }
+        marked[i][j] = true;
+        markIsland(marked, grid, i+1,j);
+        markIsland(marked, grid, i-1,j);
+        markIsland(marked, grid, i,j+1);
+        markIsland(marked, grid, i,j-1);
+    }
+
+    public int countPrimes(int n) {
+        int count = 0;
+        for (int i = 2; i < n; i++) {
+            if(isPrime(i)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public boolean isPrime(int n){
+        for (int i = 2; i < n; i++) {
+            if(n % i == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public ListNode reverseList(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        ListNode prev = null;
+        ListNode curr = head;
+        ListNode next = null;
+        while (curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
+    public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+        return nums[nums.length -k];
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        if(head == null){
+            return false;
+        }
+        Stack<ListNode> stack = new Stack<>();
+        ListNode temp = head;
+        while (temp != null){
+            stack.push(temp);
+            temp = temp.next;
+        }
+        while (head != null){
+            ListNode pop = stack.pop();
+            if(pop.val != head.val){
+                return false;
+            }
+            head = head.next;
+        }
+        return true;
+    }
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null){
+            return null;
+        }
+        if(p == root || q == root){
+            return root;
+        }
+        TreeNode left =  lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+
+        if(left != null && right != null){
+            return root;
+        }
+        if(left == null){
+            //inside right subtree
+            return right;
+        }
+        return left;
+    }
+
     public static void main(String[] args) {
         Solution s = new Solution();
-        String input = " ";
+//        String input = " ";
 //        int[] input = new int[]{7,1,5,3,6,4};
+//        char[][] input = {{'1','1','0','0','0'}, {'1','1','0','0','0'}, {'0','0','1','0','0'}, {'0','0','0','1','1'}};
 //        boolean[] b = new boolean[5];
 //        String[] input = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
-//        int input = 3;
+//        int input = 10;
 
-//        TreeNode node = new Solution.TreeNode(3);
-//        node.left = new Solution.TreeNode(20);
-//        node.right = new Solution.TreeNode(9);
-//        node.right.right = new Solution.TreeNode(7);
+//        TreeNode node = new Solution.TreeNode(1);
+//        node.left = new Solution.TreeNode(2);
+//        node.right = new Solution.TreeNode(3);
+//        node.left.right = new Solution.TreeNode(5);
 //        node.right.left = new Solution.TreeNode(15);
 
-//        ListNode node = new ListNode(3);
-//        node.next = new ListNode(2);
-//        node.next.next = new ListNode(0);
-//        node.next.next.next = new ListNode(-4);
-//        node.next.next.next.next = node.next;
-        System.out.println("|" + s.reverseWords(input) + "|");
+        ListNode node = new ListNode(3);
+        node.next = new ListNode(2);
+        node.next.next = new ListNode(2);
+        node.next.next.next = new ListNode(3);
+        System.out.println(s.isPalindrome(node));
     }
 }
