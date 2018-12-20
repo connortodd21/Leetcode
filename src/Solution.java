@@ -968,25 +968,262 @@ public class Solution {
         return left;
     }
 
+    public int[] productExceptSelf(int[] nums) {
+        int[] products = new int[nums.length];
+        int[] left = new int[nums.length];
+        int[] right = new int[nums.length];
+        left[0] = 1;
+        right[nums.length-1] = 1;
+        for (int i = 1; i < nums.length; i++) {
+            left[i] = nums[i-1] * left[i-1];
+        }
+        for (int i = nums.length -2; i >= 0 ; i--) {
+            right[i] = right[i+1] * nums[i+1];
+        }
+        for (int i = 0; i < nums.length; i++) {
+            products[i] = right[i] * left[i];
+        }
+        return products;
+    }
+
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix == null || matrix.length == 0 || matrix[0].length == 0){
+            return false;
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            if(i == matrix.length-1 || matrix[0].length == 1){
+                //on last row
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if(matrix[i][j] == target){
+                        return true;
+                    }
+                }
+            }
+            else if(matrix[i][0] <= target && target <= matrix[i][matrix[0].length-1]){
+                for (int j = 0; j < matrix[0].length; j++) {
+                    if(matrix[i][j] == target){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean searchMatrixn2(int[][] matrix, int target){
+        if(matrix == null || matrix.length == 0 || matrix[0].length == 0){
+            return false;
+        }
+        int i = matrix.length-1;
+        int j = 0;
+        while (i >= 0  && j < matrix[0].length){
+            if(target < matrix[i][j]){
+                i--;
+            }
+            else if(target > matrix[i][j]){
+                j++;
+            }
+            else {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isAnagram(String s, String t) {
+        if(s.equals("") || t.equals("") || s.length() == 0 || t.length() == 0 || s.length() != t.length() || s.equals(t)){
+            return false;
+        }
+        char[] charS = s.toCharArray();
+        char[] charT = t.toCharArray();
+        Arrays.sort(charS);
+        Arrays.sort(charT);
+        for (int i = 0; i < charS.length; i++) {
+            if(charS[i] != charT[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isAnagramOn(String s, String t){
+        if(s.equals("") || t.equals("") || s.length() == 0 || t.length() == 0 || s.length() != t.length()){
+            if(s.equals(t)){
+                return true;
+            }
+            return false;
+        }
+        int[] array1 = new int[256];
+        int[] array2 = new int[256];
+        Arrays.fill(array1,0);
+        Arrays.fill(array2,0);
+        for (int i = 0; i < s.length(); i++) {
+            array1[s.charAt(i)]++;
+            array2[t.charAt(i)]++;
+        }
+        for (int i = 0; i < array1.length; i++) {
+            if(array1[i] != array2[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        if(nums == null || nums.length == 0){
+            return new int[]{0};
+        }
+        int[] ret = new int[nums.length-k+1];
+        for (int i = 0; i < nums.length; i++) {
+            int max = Integer.MIN_VALUE;
+            if(i + k > nums.length){
+                break;
+            }
+            for (int j = 0; j < k; j++) {
+                if(nums[i+j] > max){
+                    ret[i] = nums[i+j];
+                    max = nums[i+j];
+                }
+            }
+        }
+        for (int i = 0; i < ret.length; i++) {
+            System.out.println(ret[i]);
+        }
+        return ret;
+    }
+
+    // Encodes a tree to a single string.
+    public String serialize(TreeNode root) {
+        StringBuilder s = new StringBuilder();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        s.append(root.val + ",");
+        while (!queue.isEmpty()){
+            TreeNode node = queue.remove();
+            if(node.right == null && node.left == null){
+                continue;
+            }
+            else if(node.left == null){
+                s.append("null,");
+                s.append(node.right.val  + ",");
+                queue.add(node.right);
+            }
+            else if(node.right == null){
+                s.append("null,");
+                s.append(node.left.val  + ",");
+                queue.add(node.left);
+            }
+            else {
+                s.append(node.left.val + ",");
+                s.append(node.right.val  + ",");
+                queue.add(node.left);
+                queue.add(node.right);
+            }
+        }
+        return s.toString().substring(0,s.length());
+    }
+
+    public TreeNode deserialize(String data) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        while (data.length() > 0) {
+            String currentData = data.substring(0, data.indexOf(','));
+            TreeNode t;
+            if(currentData.equals("null")){
+                t = new TreeNode(Integer.MIN_VALUE);
+            }
+            else {
+                t = new TreeNode(Integer.parseInt(currentData));
+            }
+            queue.add(t);
+            data = data.substring(data.indexOf(',')+1);
+        }
+        TreeNode head = new TreeNode(queue.remove().val);
+        buildTree(queue,head);
+        return head;
+    }
+
+    public void buildTree(Queue<TreeNode> queue, TreeNode head){
+        if(queue.isEmpty()){
+            return;
+        }
+        TreeNode left = queue.remove();
+        TreeNode right = queue.remove();
+        if(left.val == Integer.MIN_VALUE && right.val == Integer.MIN_VALUE){
+            head.left = null;
+            head.right = null;
+            return;
+        }
+        else if(left.val == Integer.MIN_VALUE){
+            //dont build left
+            head.right = right;
+            head.left = null;
+        }
+        else if(right.val == Integer.MIN_VALUE){
+            //dont build right
+            head.left = left;
+            head.right = null;
+        }
+        else {
+            head.left = left;
+            head.right = right;
+            buildTree(queue, head.left);
+            buildTree(queue, head.right);
+        }
+    }
+
+    public int trap(int[] height) {
+        if(height == null || height.length == 0){
+            return 0;
+        }
+        int max = 0;
+        int min = 0;
+        int left =0;
+        int sum = 0;
+        int right = height.length-1;
+        while (left <= right){
+            if (height[left] < height[right]){
+                if(height[left] > min){
+                    min = height[left];
+                }
+                else {
+                    sum += min - height[left++];
+                }
+            }
+            else {
+                if(height[right] > max){
+                    max = height[right];
+                }
+                else{
+                    sum += max - height[right--];
+                }
+            }
+        }
+        return sum;
+    }
+
     public static void main(String[] args) {
         Solution s = new Solution();
 //        String input = " ";
-//        int[] input = new int[]{7,1,5,3,6,4};
+//        int[] input = new int[]{1,3,-1,-3,5,3,6,7};
+//        int[][] input = {{1,4,7,11,15}, {2,5,8,12,19}, {3,6,9,16,22}, {10,13,14,17,24}, {18,21,23,26,30}};
+//        int[][] input = {{2,5}, {2,8}, {7,9}};
 //        char[][] input = {{'1','1','0','0','0'}, {'1','1','0','0','0'}, {'0','0','1','0','0'}, {'0','0','0','1','1'}};
 //        boolean[] b = new boolean[5];
 //        String[] input = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
 //        int input = 10;
 
-//        TreeNode node = new Solution.TreeNode(1);
-//        node.left = new Solution.TreeNode(2);
-//        node.right = new Solution.TreeNode(3);
-//        node.left.right = new Solution.TreeNode(5);
-//        node.right.left = new Solution.TreeNode(15);
+        TreeNode node = new Solution.TreeNode(1);
+        node.left = new Solution.TreeNode(2);
+        node.right = new Solution.TreeNode(3);
+        node.left.right = new Solution.TreeNode(5);
+        node.right.left = new Solution.TreeNode(15);
 
-        ListNode node = new ListNode(3);
-        node.next = new ListNode(2);
-        node.next.next = new ListNode(2);
-        node.next.next.next = new ListNode(3);
-        System.out.println(s.isPalindrome(node));
+//        ListNode node = new ListNode(3);
+//        node.next = new ListNode(2);
+//        node.next.next = new ListNode(2);
+//        node.next.next.next = new ListNode(3);
+        System.out.println(s.serialize(node));
+        String d = s.serialize(node);
+        s.deserialize(d);
     }
 }
