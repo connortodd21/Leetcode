@@ -74,20 +74,6 @@ public class Solution {
             }
         }
         return false;
-
-        /*
-        WITH SORTING
-         Arrays.sort(nums);
-        for (int i = 0; i < nums.length-1; i++) {
-            if(nums[i] == nums[i+1]){
-                return true;
-            }
-        }
-        if(nums[nums.length-1] == nums[nums.length-2]){
-            return true;
-        }
-        return false;
-         */
     }
 
     public int singleNumber(int[] nums) {
@@ -474,8 +460,6 @@ public class Solution {
                 if (temp != '[') {
                     return false;
                 }
-            } else {
-                return false;
             }
         }
         return stack.empty();
@@ -1030,7 +1014,7 @@ public class Solution {
         return false;
     }
 
-    public boolean isAnagram(String s, String t) {
+    public boolean isAnagram1(String s, String t) {
         if(s.equals("") || t.equals("") || s.length() == 0 || t.length() == 0 || s.length() != t.length() || s.equals(t)){
             return false;
         }
@@ -1045,6 +1029,7 @@ public class Solution {
         }
         return true;
     }
+
 
     public boolean isAnagramOn(String s, String t){
         if(s.equals("") || t.equals("") || s.length() == 0 || t.length() == 0 || s.length() != t.length()){
@@ -1201,6 +1186,195 @@ public class Solution {
         return sum;
     }
 
+    public boolean isSymmetric(TreeNode root) {
+        if(root == null){
+            return false;
+        }
+        return checkSymmetry(root, root);
+    }
+    public boolean checkSymmetry(TreeNode root1, TreeNode root2){
+        if(root1 == null && root2 == null){
+            return true;
+        }
+        else if(root1 == null || root2 == null){
+            return false;
+        }
+        else {
+            if(root1.val != root2.val){
+                return false;
+            }
+            return checkSymmetry(root1.left, root2.right) && checkSymmetry(root1.right, root2.left);
+        }
+    }
+
+    public boolean isPalindrome(int x) {
+        if(x < 0){
+            return false;
+        }
+        else if(x == 0){
+            return true;
+        }
+        int length = (int)(Math.log10(x)+1);
+        if(length == 1){
+            return true;
+        }
+        while (length != 1){
+            length = (int)(Math.log10(x)+1);
+            int left = x/(int) Math.pow(10, length-1);
+            int right = x % 10;
+            System.out.println(left + " " + right + " " + x);
+            if(left != right){
+                return false;
+            }
+            x = x/10 - (int) Math.pow(10,(int)(Math.log10(x)+1)-2)*left;
+        }
+        return true;
+    }
+
+    public String countAndSay(int n) {
+        ///1 -> 11 -> 21 -> 1211 -> 111221
+        if(n == 1){
+            return "1";
+        }
+        else if(n == 2){
+            return "11";
+        }
+        String str = "11";
+        String temp = "";
+        for (int i = 3; i <= n; i++) {
+            str += '$';
+            int count = 1;
+            temp = "";
+            char[] arr = str.toCharArray();
+            for (int j = 1; j < str.length(); j++) {
+                if(arr[j] != arr[j-1]){
+                    temp += count;
+                    temp += arr[j-1];
+                    count = 1;
+                }
+                else {
+                    count++;
+                }
+            }
+            str = temp;
+        }
+        return str;
+    }
+
+    public boolean isPalindrome(String s){
+        int start = 0;
+        int end = s.length() -1;
+        while (start <= end){
+            if(s.charAt(start) != s.charAt(end)){
+                return false;
+            }
+            start++;
+            end--;
+        }
+        return true;
+    }
+
+    public String isAnagram(String str1, String str2){
+        int[] a = new int[256];
+        int[] b = new int[256];
+        Arrays.fill(a,0);
+        Arrays.fill(b,0);
+        for (int i = 0; i < str1.length(); i++) {
+            a[str1.charAt(i)]++;
+            b[str1.charAt(i)]++;
+        }
+        for (int i = 0; i < a.length; i++) {
+            if(a[i] != b[i]){
+                return "Not Anagrams";
+            }
+        }
+        return "Anagrams";
+    }
+
+    public void StringTokens(String str){
+        if(str.length() < 1 || str.length() > 40000){
+            return;
+        }
+        String[] arr = str.split("[<>%\\$'?!., ]");
+        int count = arr.length;
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i].equals("")|| arr[i].equals(" ")){
+                count--;
+            }
+        }
+        System.out.println(count);
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i].equals("") || arr[i].equals(" ")){
+                continue;
+            }
+            System.out.println(arr[i]);
+        }
+    }
+
+    /*
+    Find root to leaf combo in a tree that sums up to a certain number
+     */
+
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if(root == null){
+            return false;
+        }
+        return hasPathSumHelper(root, sum, 0);
+    }
+
+    public boolean hasPathSumHelper(TreeNode root, int sum, int curr){
+        curr+=root.val;
+        if(curr == sum){
+            if(root.left == null && root.right == null){
+                return true;
+            }
+        }
+        if(root.left != null){
+            if(hasPathSumHelper(root.left, sum, curr)){
+                return true;
+            }
+        }
+        if(root.right != null){
+            if(hasPathSumHelper(root.right, sum, curr)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    Find all root to leaf paths in a tree that sum to a number
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        List<List<Integer>> ret = new ArrayList<>();
+        List<Integer> currentList = new ArrayList<>();
+        pathSum2Helper(root, sum,  currentList, ret);
+        return ret;
+    }
+
+    public void pathSum2Helper(TreeNode root, int sum, List<Integer> currentList, List<List<Integer>> ret){
+        if(root == null || sum-root.val < 0){
+            return;
+        }
+        currentList.add(root.val);
+        if(sum == root.val && root.left == null && root.right == null){
+            List<Integer> temp = new ArrayList<>();
+            temp.addAll(currentList);
+            ret.add(temp);
+        }
+        pathSum2Helper(root.left, sum-root.val, currentList, ret);
+        pathSum2Helper(root.right, sum-root.val, currentList, ret);
+        currentList.remove(currentList.size()-1);
+    }
+
+    public int minPathSum(int[][] grid) {
+        int sum = 0;
+        for (int i = 0; i < grid.length; i++) {
+
+        }
+    }
+
+
     public static void main(String[] args) {
         Solution s = new Solution();
 //        String input = " ";
@@ -1212,18 +1386,23 @@ public class Solution {
 //        String[] input = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
 //        int input = 10;
 
-        TreeNode node = new Solution.TreeNode(1);
-        node.left = new Solution.TreeNode(2);
-        node.right = new Solution.TreeNode(3);
-        node.left.right = new Solution.TreeNode(5);
-        node.right.left = new Solution.TreeNode(15);
+        TreeNode node = new Solution.TreeNode(5);
+        node.left = new Solution.TreeNode(4);
+        node.right = new Solution.TreeNode(8);
+        node.left.left = new Solution.TreeNode(11);
+        node.left.left.left = new Solution.TreeNode(7);
+        node.left.left.right = new Solution.TreeNode(2);
+        node.right.left = new Solution.TreeNode(13);
+        node.right.right = new Solution.TreeNode(4);
+        node.right.right.left = new Solution.TreeNode(5);
+        node.right.right.right = new Solution.TreeNode(1);
 
 //        ListNode node = new ListNode(3);
 //        node.next = new ListNode(2);
 //        node.next.next = new ListNode(2);
 //        node.next.next.next = new ListNode(3);
-        System.out.println(s.serialize(node));
-        String d = s.serialize(node);
-        s.deserialize(d);
+        System.out.println(s.pathSum(node, 22));
+//        String d = s.serialize(node);
+//        s.deserialize(d);
     }
 }

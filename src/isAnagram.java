@@ -19,10 +19,7 @@ public class isAnagram {
 
     public boolean isAnagramOn(String s, String t){
         if(s.equals("") || t.equals("") || s.length() == 0 || t.length() == 0 || s.length() != t.length()){
-            if(s.equals(t)){
-                return true;
-            }
-            return false;
+            return s.equals(t);
         }
         int[] array1 = new int[256];
         int[] array2 = new int[256];
