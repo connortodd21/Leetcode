@@ -1369,8 +1369,80 @@ public class Solution {
 
     public int minPathSum(int[][] grid) {
         int sum = 0;
-        for (int i = 0; i < grid.length; i++) {
+        int[][] dp = new int[grid.length][grid[0].length];
+        dp[0][0] = grid[0][0];
+        //initialize top and left sides
+        for (int i = 1; i < grid.length; i++) {
+            dp[i][0] = dp[i-1][0] + grid[i][0];
+        }
+        for (int i = 1; i < grid[0].length; i++) {
+            dp[0][i] = dp[0][i-1] + grid[0][i];
+        }
+        for (int i = 1; i < grid.length; i++) {
+            for (int j = 1; j < grid[0].length; j++) {
+                dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j];
+            }
+        }
+        return dp[grid.length-1][grid[0].length-1];
+    }
 
+    public int min(int a, int b){
+        if(a < b){
+            return a;
+        }
+        return b;
+    }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int l1 = nums1.length;
+        int l2 = nums2.length;
+        int index1 = 0;
+        int index2 = 0;
+        //case 1: there are an odd numbers, index of med = (l1+l2)/2
+        //case 2: there are even numbers, index of med = average( (l1+l2)-1 and (l1+l2)+1)
+        if((l1+l2)%2 != 0){
+            //even
+            double med = 0;
+            for (int i = 0; i < (1+(l1+l2)/2); i++) {
+                if(index1 != l1 && index2 != l2){
+                    if(nums1[index1] < nums2[index2]){
+                        med = nums1[index1++];
+                    }
+                    else{
+                        med = nums2[index2++];
+                    }
+                }
+                else if(index1 < l1){
+                    med = nums1[index1++];
+                }
+                else {
+                    med = nums2[index2++];
+                }
+            }
+            return med;
+        }
+        else {
+            //odd
+            double med1 = 0;
+            double med2 = 0;
+            for (int i = 0; i < (1+(l1+l2)/2); i++) {
+                med2 = med1;
+                if(index1 != l1 && index2 != l2){
+                    if(nums1[index1] < nums2[index2]){
+                        med1 = nums1[index1++];
+                    }
+                    else{
+                        med1 = nums2[index2++];
+                    }
+                }
+                else if(index1 < l1){
+                    med1 = nums1[index1++];
+                }
+                else {
+                    med1 = nums2[index2++];
+                }
+            }
+            return (med1+  med2)/2;
         }
     }
 
@@ -1378,30 +1450,30 @@ public class Solution {
     public static void main(String[] args) {
         Solution s = new Solution();
 //        String input = " ";
-//        int[] input = new int[]{1,3,-1,-3,5,3,6,7};
+        int[] input1 = new int[]{1,2};
 //        int[][] input = {{1,4,7,11,15}, {2,5,8,12,19}, {3,6,9,16,22}, {10,13,14,17,24}, {18,21,23,26,30}};
-//        int[][] input = {{2,5}, {2,8}, {7,9}};
+        int[] input2 = new int[]{-1,3};
 //        char[][] input = {{'1','1','0','0','0'}, {'1','1','0','0','0'}, {'0','0','1','0','0'}, {'0','0','0','1','1'}};
 //        boolean[] b = new boolean[5];
 //        String[] input = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
 //        int input = 10;
 
-        TreeNode node = new Solution.TreeNode(5);
-        node.left = new Solution.TreeNode(4);
-        node.right = new Solution.TreeNode(8);
-        node.left.left = new Solution.TreeNode(11);
-        node.left.left.left = new Solution.TreeNode(7);
-        node.left.left.right = new Solution.TreeNode(2);
-        node.right.left = new Solution.TreeNode(13);
-        node.right.right = new Solution.TreeNode(4);
-        node.right.right.left = new Solution.TreeNode(5);
-        node.right.right.right = new Solution.TreeNode(1);
+//        TreeNode node = new Solution.TreeNode(5);
+//        node.left = new Solution.TreeNode(4);
+//        node.right = new Solution.TreeNode(8);
+//        node.left.left = new Solution.TreeNode(11);
+//        node.left.left.left = new Solution.TreeNode(7);
+//        node.left.left.right = new Solution.TreeNode(2);
+//        node.right.left = new Solution.TreeNode(13);
+//        node.right.right = new Solution.TreeNode(4);
+//        node.right.right.left = new Solution.TreeNode(5);
+//        node.right.right.right = new Solution.TreeNode(1);
 
 //        ListNode node = new ListNode(3);
 //        node.next = new ListNode(2);
 //        node.next.next = new ListNode(2);
 //        node.next.next.next = new ListNode(3);
-        System.out.println(s.pathSum(node, 22));
+        System.out.println(s.findMedianSortedArrays(input1, input2));
 //        String d = s.serialize(node);
 //        s.deserialize(d);
     }
