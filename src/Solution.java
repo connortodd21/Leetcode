@@ -1446,13 +1446,262 @@ public class Solution {
         }
     }
 
+    public int reverse(int x) {
+        int ret = 0;
+        int minus = 1;
+        if(x < 0){
+            minus = -1;
+        }
+        int i = 0;
+        int temp = x * minus;
+        while (temp > 0){
+            i++;
+            temp = temp/10;
+        }
+        i--;
+        x = x * minus;
+        while(x > 0){
+            int temp2 = x % 10;
+            ret += (temp2 * Math.pow(10,i--));
+            x = x/10;
+        }
+        System.out.println(ret);
+        System.out.println(Integer.MIN_VALUE);
+        return ((ret * minus) >= Integer.MAX_VALUE -1  ||(ret * minus) <= Integer.MIN_VALUE + 1 ) ? 0 : ret * minus;
+    }
+
+    public static int maxArea(int[] height) {
+        if(height == null || height.length == 0){
+            return 0;
+        }
+        int left =0;
+        int maxArea = 0;
+        int right = height.length-1;
+        while (left <= right){
+            int leftval = height[left];
+            int rightval = height[right];
+            if(rightval < leftval){
+                int area = rightval * (right-left);
+                if(area > maxArea){
+                    maxArea = area;
+                }
+                right--;
+            }
+            else{
+                int area = leftval * (right-left);
+                if(area > maxArea){
+                    maxArea = area;
+                }
+                left++;
+            }
+        }
+        return maxArea;
+    }
+
+    public static int uniquePaths(int m, int n) {
+        int grid[][] = new int[m][n];
+        System.out.println(grid.length);
+        if(m == 1 || n == 1){
+            return 1;
+        }
+        grid[0][0] = 0;
+        for (int i = 1; i < m; i++) {
+            grid[i][0] = 1;
+        }
+        for (int i = 1; i < n; i++) {
+            grid[0][i] = 1;
+        }
+        for(int i = 1; i < m; i++){
+            for(int j = 1; j < n; j++){
+                grid[i][j] = grid[i-1][j] + grid[i][j-1];
+            }
+        }
+        return grid[m-1][n-1];
+    }
+
+    public static int uniquePaths2(int[][] obstacleGrid){
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int grid[][] = new int[m][n];
+        if(obstacleGrid[m-1][n-1] == 1){
+            return 0;
+        }
+        if(m == 1 || n == 1){
+            if(obstacleGrid[0][0] == 1){
+                return 0;
+            }
+            return 1;
+        }
+        grid[0][0] = 0;
+        for (int i = 1; i < m; i++) {
+            if (obstacleGrid[i][0] == 1){
+                break;
+            }
+            grid[i][0] = 1;
+        }
+        for (int i = 1; i < n; i++) {
+            if (obstacleGrid[0][i] == 1){
+                break;
+            }
+            grid[0][i] = 1;
+        }
+        for(int i = 1; i < m; i++){
+            for(int j = 1; j < n; j++){
+                if (obstacleGrid[i][j] == 1){
+                    grid[i][j] = 0;
+                }
+                else {
+                    grid[i][j] = grid[i - 1][j] + grid[i][j - 1];
+                }
+            }
+        }
+        return grid[m-1][n-1];
+    }
+
+    public static int romanToInt(String s) {
+        if (s.length() == 0){
+            return 0;
+        }
+        int total = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'I'){
+                if (i + 1 < s.length()){
+                    if (s.charAt(i+1) == 'V'){
+                        total += 4;
+                        i++;
+                    }
+                    else if (s.charAt(i+1) == 'X'){
+                        total += 9;
+                        i++;
+                    }
+                    else {
+                        total += 1;
+                    }
+                }
+                else {
+                    total += 1;
+                }
+            }
+            else if (s.charAt(i) == 'V'){
+                total += 5;
+            }
+            else if (s.charAt(i) == 'X'){
+                if (i + 1 < s.length()){
+                    if (s.charAt(i+1) == 'L'){
+                        total += 40;
+                        i++;
+                    }
+                    else if (s.charAt(i+1) == 'C'){
+                        total += 90;
+                        i++;
+                    }
+                    else {
+                        total += 10;
+                    }
+                }
+                else {
+                    total += 10;
+                }
+
+            }
+            else if (s.charAt(i) == 'L'){
+                total += 50;
+            }
+            else if (s.charAt(i) == 'C'){
+                if (i + 1 < s.length()){
+                    if (s.charAt(i+1) == 'D'){
+                        total += 400;
+                        i++;
+                    }
+                    else if (s.charAt(i+1) == 'M'){
+                        total += 900;
+                        i++;
+                    }
+                    else {
+                        total += 100;
+                    }
+                }
+                else {
+                    total += 100;
+                }
+
+
+            }
+            else if (s.charAt(i) == 'D'){
+                total += 500;
+
+            }
+            else if (s.charAt(i) == 'M'){
+                total += 1000;
+            }
+        }
+        return total;
+    }
+
+    public static int maxArea2(int[] height) {
+        if(height == null || height.length == 0){
+            return 0;
+        }
+        int left =0;
+        int maxArea = 0;
+        int right = height.length-1;
+        while (left <= right){
+            int leftval = height[left];
+            int rightval = height[right];
+            if(rightval < leftval){
+                int area = rightval * (right-left);
+                if(area > maxArea){
+                    maxArea = area;
+                }
+                right--;
+            }
+            else{
+                int area = leftval * (right-left);
+                if(area > maxArea){
+                    maxArea = area;
+                }
+                left++;
+            }
+        }
+        return maxArea;
+    }
+
+    public static String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0 || strs[0].equals("")){
+            return "";
+        }
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < strs[0].length(); i++) {
+            char curr = 0;
+            int j;
+            for (j = 0; j < strs.length; j++) {
+                if (strs[j].length() == i){
+                    return s.toString();
+                }
+                if (strs[j].equals("")){
+                    return "";
+                }
+                if (j == 0){
+                    curr = strs[j].charAt(i);
+                }
+                else{
+                    if (strs[j].charAt(i) != curr){
+                        return s.toString();
+                    }
+                }
+            }
+            s.append(curr);
+        }
+        return s.toString();
+    }
+
 
     public static void main(String[] args) {
         Solution s = new Solution();
 //        String input = " ";
-        int[] input1 = new int[]{1,2};
+//        int[] input1 = new int[]{1,2};
 //        int[][] input = {{1,4,7,11,15}, {2,5,8,12,19}, {3,6,9,16,22}, {10,13,14,17,24}, {18,21,23,26,30}};
-        int[] input2 = new int[]{-1,3};
+//        int[] input2 = new int[]{-1,3};
 //        char[][] input = {{'1','1','0','0','0'}, {'1','1','0','0','0'}, {'0','0','1','0','0'}, {'0','0','0','1','1'}};
 //        boolean[] b = new boolean[5];
 //        String[] input = new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
@@ -1473,7 +1722,7 @@ public class Solution {
 //        node.next = new ListNode(2);
 //        node.next.next = new ListNode(2);
 //        node.next.next.next = new ListNode(3);
-        System.out.println(s.findMedianSortedArrays(input1, input2));
+//        System.out.println(s.longestPalindrome2("babad"));
 //        String d = s.serialize(node);
 //        s.deserialize(d);
     }
